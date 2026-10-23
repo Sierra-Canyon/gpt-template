@@ -1,0 +1,27 @@
+[project]
+name = "hse-gpt"
+version = "0.1.0"
+description = "Honors Software Engineering 2026-27 — theory track workspace, T01 onward: linear algebra, micrograd, makemore, then the GPT build"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.0",
+    "matplotlib>=3.9",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+# T10 runs `uv add torch`. This index block makes that pull the CPU-only build on
+# Windows and Linux (a 200 MB download instead of 2 GB of CUDA); Macs ignore it.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform != 'darwin'" }]
+
+[tool.uv]
+package = false          # this is a workspace, not a library to install
