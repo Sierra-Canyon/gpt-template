@@ -34,14 +34,15 @@ bash scripts/fetch_corpus.sh
 The sha256 in `SOURCE.md` has to match the file it fetched. Same corpus, byte for byte,
 from September to June.
 
-## Run everything with `uv run`, as a module
+## Run every script with `uv run`, from the repo root
 
 ```
-uv run python -m linear.chapter_vectors
+uv run python linear/chapter_vectors.py
 ```
 
-`-m linear.chapter_vectors`, not `linear/chapter_vectors.py`. Running a file as a module
-is what lets one script import another with `from linear.chapter_vectors import ...`.
+From the top of the repo, not from inside `linear/`. The scripts open `data/corpus.txt`
+by a path relative to where you are standing, so `cd linear && uv run python
+chapter_vectors.py` fails with `FileNotFoundError` even though the file is right there.
 Plain `python` uses whatever is first on your PATH and will not find NumPy; the symptom is
 `ModuleNotFoundError` on a package you just watched install.
 
