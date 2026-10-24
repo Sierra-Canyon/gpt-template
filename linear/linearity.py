@@ -4,14 +4,14 @@
 # A function f is linear when f(u + v) = f(u) + f(v) and f(3u) = 3 f(u); then a matrix does it,
 # and the matrix's columns are f(i-hat) and f(j-hat). There is nothing to edit in this file.
 import sys
-sys.path.insert(0, "linear")
+sys.path.insert(0, "linear")                       # so "from chapter_vectors import ..." works from the repo root
 import numpy as np
 from chapter_vectors import V2, size
 
 vA, vB = V2[2], V2[7]
 mean = V2.mean(axis=0)                               # the average chapter vector
 
-candidates = {
+candidates = {                                        # each lambda is a one-line function: lambda v: ... is "a function that takes v and returns ..."
     "per 1000 words":       lambda v: v * 1000 / size,                    # counts as a rate
     "total and difference": lambda v: np.array([v[0] + v[1], v[0] - v[1]]),
     "centered":             lambda v: v - mean,                           # subtract the average chapter

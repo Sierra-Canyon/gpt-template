@@ -5,7 +5,7 @@
 # than unknowns and lstsq finds the closest point instead. Then a singular system you built yourself.
 # There is nothing to edit in this file.
 import sys
-sys.path.insert(0, "linear")
+sys.path.insert(0, "linear")                       # so "from chapter_vectors import ..." works from the repo root
 from collections import Counter
 import numpy as np
 from chapter_vectors import chapters, count_vector, words, WORD1, WORD2

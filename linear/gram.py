@@ -3,7 +3,7 @@
 #                     or:  uv run python linear/gram.py bands    (T06: all ten chapters against each other, in two vocabulary bands, and the timing)
 # Uses YOUR dot and matmul from linear/linalg.py on your chapter vectors. There is nothing to edit in this file.
 import sys, time
-sys.path.insert(0, "linear")
+sys.path.insert(0, "linear")                       # so "from chapter_vectors import ..." works from the repo root
 from collections import Counter
 import numpy as np
 from chapter_vectors import chapters, count_vector, words

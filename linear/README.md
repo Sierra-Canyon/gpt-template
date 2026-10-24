@@ -17,4 +17,4 @@ line is the one edit that everything else depends on.
 | `test_linalg.py` | T05 | Five tests for your `linalg.py`. |
 | `gram.py` | T05, T06 | Your `dot` on two chapters; `bands` mode: every pair, two vocabularies, and the timing against NumPy. |
 
-Your own files land here too: `NOTATION.md`, the video-notes photos, `MATRICES.md`, `FINDINGS.md`.
+Your own files land here too: `NOTATION.md`, the video-notes photos, `FINDINGS.md`.

@@ -3,7 +3,7 @@
 # Multiplies your T02 rotation, shear and scale in all six orders and prints each product with its determinant.
 # There is nothing to edit in this file; it reads MATRICES from linear/landing.py.
 import sys
-sys.path.insert(0, "linear")
+sys.path.insert(0, "linear")                       # so "from chapter_vectors import ..." works from the repo root
 from itertools import permutations
 import numpy as np
 from landing import MATRICES

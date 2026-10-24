@@ -5,7 +5,7 @@
 # the angle between them: 0 means parallel (dependent), 1 means perpendicular. Draws the closest pair.
 # There is nothing to edit in this file.
 import sys
-sys.path.insert(0, "linear")
+sys.path.insert(0, "linear")                       # so "from chapter_vectors import ..." works from the repo root
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")

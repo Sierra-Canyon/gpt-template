@@ -4,7 +4,7 @@
 # sends all ten chapter vectors through each one and draws before/after. The lines you edit are the
 # three np.array(...) rows under MATRICES.
 import sys
-sys.path.insert(0, "linear")
+sys.path.insert(0, "linear")                       # so "from chapter_vectors import ..." works from the repo root
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
