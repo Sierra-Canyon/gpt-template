@@ -26,5 +26,5 @@ for name, f in candidates.items():
     scale_gap = np.abs(f(3 * vA) - 3 * f(vA)).max()           # f(3u) against 3 f(u)
     M = np.column_stack([f(e1), f(e2)])                        # the matrix IF f were linear
     matrix_gap = np.abs(M @ vA - f(vA)).max()                  # does that matrix reproduce f?
-    print(f"{name:22} {add_gap:10.4g} {scale_gap:10.4g} {matrix_gap:11.4g}")
+    print(f"{name:22} {add_gap:10.1f} {scale_gap:10.1f} {matrix_gap:11.1f}")
     print(f"{'':22} matrix from where i and j land: {M.round(4).tolist()}")

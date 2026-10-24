@@ -14,9 +14,9 @@ import matplotlib.pyplot as plt
 # In: an axes to draw on, a 2x2 matrix, a title.  Out: nothing; draws the before/after picture on the axes.
 def draw(ax, M, title):
     M = np.asarray(M, dtype=float)
-    for t in np.linspace(-3, 3, 13):                                 # 13 grid lines each way
+    for t in np.linspace(-3, 3, 13):                                 # 13 evenly spaced numbers from -3 to 3: one grid line each
         for line in (np.array([[t, -3], [t, 3]]), np.array([[-3, t], [3, t]])):   # a vertical and a horizontal line, as two points
-            ax.plot(*line.T, color="lightgray", lw=0.6)              # the grid before
+            ax.plot(*line.T, color="lightgray", lw=0.6)              # the grid before. .T splits the points into an x row and a y row; the * hands those two rows to plot as its two arguments
             ax.plot(*(line @ M.T).T, color="steelblue", lw=0.6)      # the same line after M (line @ M.T applies M to each point)
     square = np.array([[0, 0], [1, 0], [1, 1], [0, 1], [0, 0]])
     ax.fill(*(square @ M.T).T, color="gold", alpha=0.4)              # where the unit square went

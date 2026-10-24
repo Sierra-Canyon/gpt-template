@@ -20,11 +20,11 @@ coef = np.linalg.solve(M, vC)                                            # the a
 print("2 words  coefficients", coef.round(3), " check", (M @ coef).round(3), "vs", vC)
 
 # more words: more equations than unknowns, so ask for the closest point instead
-ranked = [w for w, _ in Counter(words).most_common()]                    # every word, most common first
+ranked = [w for w, _ in Counter(words).most_common()]                    # every word, most common first; ranked[0] is "the", so ranked[1] is the next most common word
 for vocab in ([WORD1, WORD2, ranked[1]], ranked[:10], ranked[:50]):
     M = np.column_stack([count_vector(A, vocab), count_vector(B, vocab)])
     vC = count_vector(C, vocab)
-    coef, *_ = np.linalg.lstsq(M, vC, rcond=None)                        # least squares: the a, b that get closest
+    coef, *_ = np.linalg.lstsq(M, vC, rcond=None)                        # least squares: the a, b that get closest. lstsq returns four things; *_ throws away all but the first. rcond=None silences a warning
     rel = np.linalg.norm(M @ coef - vC) / np.linalg.norm(vC)             # how far the closest point is, as a fraction of vC's length
     print(f"{len(vocab):2d} words  coefficients {coef.round(3)}  relative miss {rel:.4f}")
 

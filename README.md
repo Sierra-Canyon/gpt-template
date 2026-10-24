@@ -23,7 +23,7 @@ That installs Python 3.12, NumPy and Matplotlib, installs a git filter so notebo
 output never reaches a commit, installs the secret guard, and runs the environment check.
 It ends by asking you to try committing a fake key and watch it get refused. Do that.
 
-Then T01 Step 4 brings your corpus over:
+Then T01 Step 3 brings your corpus over:
 
 ```
 cp ../hse-2026-2027-foundations-<your-username>/scripts/fetch_corpus.sh scripts/
@@ -59,8 +59,8 @@ Plain `python` uses whatever is first on your PATH and will not find NumPy; the 
 | `scripts/check_env.py` | The environment check. Re-run it whenever something breaks. |
 | `scripts/install_secret_guard.sh` | Pre-commit hook that refuses staged keys. |
 
-Every folder above has a README saying what goes in it. Read the one for the assignment
-you are on before you start it.
+`linear/`, `micrograd/`, `names/`, `scratch/` and `data/` each have a README saying what goes in
+them. Read `linear/README.md` before T01.
 
 ## Rules that apply in every repo you open this year
 

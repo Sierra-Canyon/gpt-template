@@ -26,7 +26,7 @@ def angle(a, b):
 
 if __name__ == "__main__":
     e1, e2 = np.array([1.0, 0.0]), np.array([0.0, 1.0])     # i-hat and j-hat
-    U = V2 / np.linalg.norm(V2, axis=1)[:, None]            # each chapter scaled to length 1, still (10, 2)
+    U = V2 / np.linalg.norm(V2, axis=1)[:, None]            # each chapter scaled to length 1, still (10, 2). [:, None] makes the ten lengths a column so each row is divided by its own length
     ratio = V2[:, 1] / V2[:, 0]                             # WORD2 count over WORD1 count, per chapter
     lo, hi = ratio.argmin(), ratio.argmax()                 # the two chapters whose arrows point furthest apart
 

@@ -18,6 +18,7 @@ d = dot(vA, vB)
 cos = d / (dot(vA, vA) ** 0.5 * dot(vB, vB) ** 0.5)         # cosine = dot / (length of A * length of B)
 print(f"chapter 2 . chapter 7 = {d:,.0f}   cosine = {cos:.4f}")
 print("one-row matmul:", matmul([vA], [[x] for x in vB]))  # a 1x50 times a 50x1 is the same number, wrapped as [[...]]
+print("top 10 of the 50:", vocab[:10])
 
 if len(sys.argv) > 1 and sys.argv[1] == "bands":
     N = len(chapters)
@@ -45,10 +46,11 @@ if len(sys.argv) > 1 and sys.argv[1] == "bands":
         return min(times)
 
     for V in (50, 500, 2000):
+        V = min(V, len(ranked))                                         # a corpus with fewer than V distinct words uses all of them, and the row says so
         X = [count_vector(ch, ranked[:V]).tolist() for ch in chapters]
         Xt = [list(col) for col in zip(*X)]
         A = np.array(X)
         tp = best_of_5(lambda: matmul(X, Xt))                           # your matmul, pure Python
-        tn = best_of_5(lambda: A @ A.T)                                 # NumPy's
+        tn = min(best_of_5(lambda: A @ A.T) for _ in range(4))          # NumPy's; the fastest of twenty, because a few microseconds of noise would swing the ratio
         print(f"V={V:5d}  pure Python {tp * 1000:8.2f} ms   NumPy {tn * 1000:7.3f} ms   ratio {tp / tn:7.0f}x"
               f"   same answer: {np.allclose(matmul(X, Xt), A @ A.T)}")
