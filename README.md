@@ -51,8 +51,8 @@ Plain `python` uses whatever is first on your PATH and will not find NumPy; the 
 | Path | What |
 |---|---|
 | `linear/` | **T01–T06.** Chapter vectors, transforms, determinants, span, the dot and matrix product you write, the Gram matrix. |
-| `micrograd/` | **T07–T13.** Your own `Value` class and the training loop, from the Karpathy lecture, on your corpus. |
-| `names/` | **T14–T22.** The bigram and MLP name models, trained on names mined from your corpus. |
+| `micrograd/` | **T07–T12, T21.** Your own `Value` class and the training loop, from the Karpathy lecture, on your corpus. |
+| `names/` | **T13–T20, T22.** The bigram and MLP name models, trained on names mined from your corpus. |
 | `evidence/T<nn>.md` | One file per assignment with a marked slot for every paste, prediction and reflection answer. `scripts/check_evidence.py T01` tells you which slots are still empty. |
 | `scratch/` | Yours. Experiments, one-off scripts, notes to yourself. Committed, not graded. |
 | `data/` | Your corpus. Git-ignored except `README.md` and `SOURCE.md`. |
