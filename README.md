@@ -65,7 +65,7 @@ them. Read `linear/README.md` before T01.
 ## Rules that apply in every repo you open this year
 
 **Branches.** `dev/<feature>` for work. One pull request per assignment, **jd12** as the
-reviewer, and the PR body says where the work is weakest. Your student log is on the
+reviewer. Your student log is on the
 `<your-username>-track` branch from T01 to the end of the semester.
 
 **Type the code the assignment tells you to type.** The shipped scripts are the ones you
