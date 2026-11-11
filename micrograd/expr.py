@@ -41,12 +41,15 @@ if len(sys.argv) > 1 and sys.argv[1] == "grads":
     for name, v, kw in (("a1", A1, "da1"), ("a2", A2, "da2"), ("b1", B1, "db1"), ("b2", B2, "db2"), ("s", S, "ds")):
         nudge = (L_with(**{kw: h}) - L_with()) / h
         print(f"dL/d{name}  by hand {v.grad: 10.4f}   by nudging {nudge: 10.4f}")
-    draw_dot(L).render("micrograd/expr-grads", format="svg", cleanup=True)
-    print("drawn: micrograd/expr-grads.svg")
+    try:
+        draw_dot(L).render("micrograd/expr-grads", format="svg", cleanup=True)
+        print("drawn: micrograd/expr-grads.svg")
+    except Exception as e:                         # the dot program is missing: the five lines above are still the check
+        print("could not draw (is the dot program installed and on your PATH?):", type(e).__name__)
 else:
     print_graph(L)
     try:
         draw_dot(L).render("micrograd/expr", format="svg", cleanup=True)
         print("drawn: micrograd/expr.svg")
     except Exception as e:                         # the dot program is missing: the text graph above is the fallback
-        print("could not draw (is graphviz installed with brew?):", type(e).__name__)
+        print("could not draw (is the dot program installed and on your PATH?):", type(e).__name__)

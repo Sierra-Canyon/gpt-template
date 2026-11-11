@@ -2,14 +2,22 @@
 # Run from the repo root:  uv run python linear/chapter_vectors.py
 # Cuts your corpus into ten equal "chapters" by word count and turns each one into a vector of
 # two word counts. The one line you edit is WORD2. Every later script in linear/ imports from here.
-import re
 import numpy as np
 
 WORD1 = "the"
 WORD2 = "CHANGE_ME"        # a content word that matters in your corpus and appears in all ten chapters
 
 text = open("data/corpus.txt", encoding="utf-8").read()
-words = re.findall(r"[a-z']+", text.lower())      # every run of letters or apostrophes, lowercased: the corpus as a list of words
+words = []                                        # the corpus as a list of lowercase words
+current = ""                                      # the word being built, one character at a time
+for ch in text.lower():
+    if "a" <= ch <= "z" or ch == "'":             # a letter or an apostrophe: still inside a word
+        current += ch
+    elif current != "":                           # anything else ends the word
+        words.append(current)
+        current = ""
+if current != "":                                 # the last word, if the file ends on a letter
+    words.append(current)
 N = 10
 size = len(words) // N                            # words per chapter (// is whole-number division)
 chapters = []                                     # ten lists of words

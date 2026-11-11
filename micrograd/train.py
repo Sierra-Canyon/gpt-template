@@ -42,8 +42,14 @@ if mode == "before":
     sys.exit()
 
 losses = []
+blew_up = False                                    # set when a number grows past what the engine's tanh can hold
 for step in range(STEPS):
-    preds, loss = forward(net)                     # forward: predictions and the loss
+    try:
+        preds, loss = forward(net)                 # forward: predictions and the loss
+    except OverflowError:                          # math.exp inside tanh was handed a number too large: the net has exploded
+        print(f"step {step:3d}   OverflowError: a neuron's sum is too large for tanh, so training stops here")
+        blew_up = True
+        break
     if mode != "noreset":
         for p in net.parameters():
             p.grad = 0.0                           # the gradients ADD UP (+=), so they have to be zeroed before each backward
@@ -54,7 +60,8 @@ for step in range(STEPS):
     if step % 10 == 0 or step == STEPS - 1:
         print(f"step {step:3d}   loss {loss.data:8.4f}   correct {correct(preds)}/{len(xs)}")
 
-preds, loss = forward(net)
+if not blew_up:
+    preds, loss = forward(net)                     # one more forward pass, so the numbers below are after the last update
 print(f"after training: loss {loss.data:.4f}   correct {correct(preds)}/{len(xs)}")
 print("misses (chapter, start, x1, x2, label, prediction):")
 for (c, start), x, y, p in zip(where, xs, ys, preds):
@@ -63,7 +70,7 @@ for (c, start), x, y, p in zip(where, xs, ys, preds):
 
 name = "micrograd/loss_noreset.png" if mode == "noreset" else "micrograd/loss.png"
 plt.figure(figsize=(6, 4))
-plt.plot(range(STEPS), losses)
+plt.plot(range(len(losses)), losses)               # len(losses) is STEPS, or fewer if training stopped early
 plt.xlabel("step"); plt.ylabel("loss (sum of squared error)"); plt.title("MLP(2, [4, 4, 1]) on 40 corpus slices")
 plt.tight_layout(); plt.savefig(name, dpi=110)
 print("drawn:", name)
